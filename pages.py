@@ -1,6 +1,11 @@
 from transformers import *
 
 PAGES = [
+
+##
+## Apply what we learned in Gematria Primes subsitution table (aka atbash)
+##
+## images: 01.jpg
     ('''
 ᚱ-ᛝᚱᚪᛗᚹ.ᛄᛁᚻᛖᛁᛡᛁ-ᛗᚫᚣᚹ-ᛠᚪᚫᚾ-/
 ᚣᛖᛈ-ᛄᚫᚫᛞ.ᛁᛉᛞᛁᛋᛇ-ᛝᛚᚱᛇ-ᚦᚫᛡ/
@@ -13,6 +18,9 @@ PAGES = [
 ᛈ-ᛈᚱᛞᚪᛁᚳ./
         ''', TransformerSequence(AtbashTransformer())),
 
+## Learn: We bruteforce Vigenere keys and we get potential candidate key: "DIVINITY" that we found on page 10.jpg
+##
+## images: 03.jpg till 04.jpg
     ('''
 ᚢᛠᛝᛋᛇᚠᚳ.ᚱᛇᚢᚷᛈᛠᛠ-ᚠᚹᛉ/
 ᛏᚳᛚᛠ-ᚣᛗ-ᛠᛇ-ᛏᚳᚾᚫ-ᛝᛗᛡ/
@@ -40,8 +48,21 @@ PAGES = [
 ᚢᛄᚱ-ᚪᛗᛒᛈ-ᚷᛈᛒᚢᚾᛠᛝᚠ.ᚾᛉᛖ-/
 ᚣᚷᛁᛠᛝᚢᛗᛏᚳᚷᛠᛠ-ᛄᚫ-ᛒᛈᚹᛞ.ᚠᚣ/
 ᛉ-ᚫᚢᚠ-ᛇᛄᛈ-ᛉᛚᚦᛠᚪ-ᛚᚦ-ᚳᚣᚢᛡ./
-ᚳᛖ-ᛚᚫᛇᛁᛉᚦᛋᚫᚻᚫ-ᚦᚣᚠᛚᚳᛖᚱ-ᛈᚠᚪᛉ-ᚱᛒᛖ-ᚫᚳᛒᚠ./''', TransformerSequence(VigenereTransformer(key='ᛞᛁᚢᛁᚾᛁᛏᚣ', interrupt_indices={ 48, 74, 84, 132, 159, 160, 250, 421, 443, 465, 514 }))),
+ᚳᛖ-ᛚᚫᛇᛁᛉᚦᛋᚫᚻᚫ-ᚦᚣᚠᛚᚳᛖᚱ-ᛈᚠᚪᛉ-ᚱᛒᛖ-ᚫᚳᛒᚠ./''',
+	TransformerSequence(
+		VigenereTransformer(
+			key='ᛞᛁᚢᛁᚾᛁᛏᚣ', ## DIVINITY
+			interrupt_indices={ 48, 74, 84, 132, 159, 160, 250, 421, 443, 465, 514 }
+		)
+	)
+),
 
+## Learn: transform Gematria Primus table
+## Learn: Magic squares that sums to 1033
+## Learn: words can be transformed to Prime sums, that will fit the magic square
+## HINT: totient function is important ??? WHY o WHY?!
+## 
+## images: 05.jpg
     ('''
 ᛋᚩᛗᛖ-ᚹᛁᛋᛞᚩᛗ.ᚦᛖ-ᛈᚱᛁᛗᛖᛋ-ᚪᚱᛖ-ᛋᚪᚳ/
 ᚱᛖᛞ.ᚦᛖ-ᛏᚩᛏᛁᛖᚾᛏ-ᚠᚢᚾᚳᛏᛡᚾ-ᛁᛋ-ᛋᚪ/
@@ -55,6 +76,10 @@ PAGES = [
 18     ᚪᚾᚪᛚᚩᚷ      ᚢᚩᛁᛞ        ᛗᚩᚢᚱᚾᚠᚢᛚ        ᚫᚦᛖᚱᛠᛚ./
 151        131     ᚳᚪᛒᚪᛚ       138     272./''', TransformerSequence()),
 
+## Apply what we learned in Gematria Primes subsitution table (aka atbash)
+## Learn: using ceaser shift +3
+##
+## images: 06.jpg till 09.jpg
     ('''
 ᚹ-ᚣᛠᚹᛟ.ᚹ-ᛇᚹᛟ-ᚻᛈᚣᛝᚻᛈᚻ-ᛋᛠ-/
 ᚫᛠ-ᚹᛟᚻ-ᛏᛋᚢᚻᚳ-ᚪᛝᚠ-ᚹ-ᛇᚹᛏᛋᛈ/
@@ -103,6 +128,9 @@ PAGES = [
 ᚢᛟᛡᚩᛏᛠᛟᚹᛉᛄᛈ-ᚠᛁᛏ-ᚩᚣᛞ-ᚻᚹ/
 ᚳ./''', TransformerSequence(AtbashTransformer(), ShiftTransformer(shift=3))),
 
+## Learn: transform Gematria Primus table
+##
+## images: 10.jpg till 13.jpg
     ('''
 ᚦᛖ-ᛚᚩᛋᛋ-ᚩᚠ-ᛞᛁᚢᛁᚾᛁᛏᚣ.ᚦᛖ-ᚳᛁᚱᚳᚢ/
 ᛗᚠᛖᚱᛖᚾᚳᛖ-ᛈᚱᚪᚳᛏᛁᚳᛖᛋ-ᚦᚱᛖ/
@@ -153,6 +181,15 @@ PAGES = [
 ᚪᚾ-ᛁᚾᛋᛏᚱᚢᚳᛏᛡᚾ.ᛈᚱᚩᚷᚱᚪᛗ-ᚣᚩᚢ/
 ᚱ-ᛗᛁᚾᛞ.ᛈᚱᚩᚷᚱᚪᛗ-ᚱᛠᛚᛁᛏᚣ./''', TransformerSequence()), 
 
+## Learn: We bruteforce Vigenere keys and we get potential candidate: "CIRCVMFERENCE" that we found on page 10.jpg
+## Learn: We see that the key is far from perfect.
+##        We got a high IoC and we can see complete words like "DVRNG", "MASTER" and "THE", "VOICE".
+##        This means the key needs adjustments. 
+## Learn: Once we manage to fix the "key" we see all beginning words are correct.
+##        This means there are "interrupt_indices" that needs to be checked and observed.
+##
+## images: 14.jpg till 15.jpg
+
     ('''
 ᚪ-ᛋᚹᚪᛁ.ᛈᚢᛟᚫ-ᛈ-ᚠᛖᚱᛋᛈᛈ-ᚦᛗ-ᚾᚪᚱ/
 ᛚᚹᛈ-ᛖᚩᛈᚢᛠᛁᛁᚻᛞ-ᛚᛟ-ᛠ.ᛄᛖ-/
@@ -170,8 +207,18 @@ PAGES = [
 ᚢᛝᛁᛋᛟ-ᚦᚫᚷ-ᛄᛗᛗᚳ-ᚪᚪᛠᛞ-ᚹᚹᚢ-ᚾᛉᚢ/
 ᚹ-ᛈᛝ-ᛁᚩᛠᚳᛠ-ᛉᚾ-ᛡᛟᚢᛟ-ᛇᛒᚩ-ᛁᚱ-ᚦᛠ-/
 ᛉ.ᚪᛁᛈ-ᚦᚹ-ᛗᚳᛁᛞᚹᚾᚣᛗ-ᚹᛗᛞᛖ-ᚹᛈᚾ/
-ᛗᚷᚣᛏᛠᛈᛖᚪ./''', TransformerSequence(VigenereTransformer(key='ᚠᛁᚱᚠᚢᛗᚠᛖᚱᛖᚾᚠᛖ', interrupt_indices={ 49, 58 }))),
+ᛗᚷᚣᛏᛠᛈᛖᚪ./''', TransformerSequence(
+		VigenereTransformer( 
+			#key='ᚳᛁᚱᚳᚢᛗᚠᛖᚱᛖᚾᚳᛖ',  ## CIRCVMFERENCE
+			key='ᚠᛁᚱᚠᚢᛗᚠᛖᚱᛖᚾᚠᛖ',  ## FIRFVMFERENFE
+			interrupt_indices={ 49, 58 }
+		)
+	)
+),
 
+## Learn: transform Gematria Primus table
+##
+## images: 16.jpg
     ('''
 ᚪᚾ-ᛁᚾᛋᛏᚱᚢᚳᛏᛡᚾ.ᚳᚹᛖᛋᛏᛡᚾ-ᚪᛚᛚ-/
 ᚦᛝᛋ.ᛞᛁᛋᚳᚩᚢᛖᚱ-ᛏᚱᚢᚦ-ᛁᚾᛋᛁᛞᛖ-/
@@ -185,6 +232,7 @@ PAGES = [
 1071       280     934     812     204/
 966        278     312     1311        434/''', TransformerSequence()),
 
+## images: 17.jpg
     ('''
 ᛋᚻᛖᚩᚷᛗᛡᚠ-ᛋᚣᛖᛝᚳ.ᚦᛄᚷᚫ-ᚠᛄᛟ-/
 ᚩᚾᚦ-ᚾᛖᚹᛒᚪᛋᛟᛇᛁᛝᚢ-ᚾᚫᚷᛁᚦ-ᚻᛒᚾᛡ-/
@@ -199,6 +247,7 @@ PAGES = [
 ᛇᚻ-ᛞᛝᚷ-ᛟᛝᛚᚢᚱᚾᛏ-ᚫᛋᚣᚢᚻᚱᛏ-ᚻᚳ-ᛋᛟ/
 ᛏᛟᛝᚢᚱ-ᛋ-ᚠᚩᛖᚹᛠᛟᛚᚠᚫ-ᛗᚱᛝ-ᛞᚪᛗᚱ-ᚹ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 18.jpg
     ('''
 ᚪᛁᛗᛋᚾ-ᛋᛟᚱᚢᚹᛋᛚᛡ.ᛟᚪᚫᛝᛋᛞᛈᛏ-ᚳᚱᚦ/
 ᛡ-ᚱᛒᚩᛞᚦᚠ-ᚣᛉᛁᛏ.ᛟᛁ-ᚠᛚᚩ-ᚠᛠ-ᚱᚩᛟᛗᚻ/
@@ -213,6 +262,7 @@ PAGES = [
 ᚣᚻ-ᚠᛖᛄᛠᚾ-ᛟᚫ-ᚢᚪ-ᚻᚱ-ᛖᛠᚦᚠᛄᚪ-ᛚᛉ/
 ᛋᛏ-ᛗᚠᛚᚠᛏ-ᚷᛁᚦ-ᚢᛚᚷ-ᛉᛠᛏᛋᛚᛄᛈ-ᛚᛉᛁ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 19.jpg
     ('''
 ᛟᛗ-ᚢ.ᚻᛏ-ᛒᛇᛚᛞᚻᛒᛗ-ᛠᚱᛒ-ᚾᚻᛒᛖᚷᛇ-/
 ᛞᛚᚹᛇᛡᛈᚩ-ᚻᛖᛠ-ᚹᛁᚱᛁᚻ-ᚢᚦᚻᚣ-ᚾᛉᛒᚷᛄ/
@@ -226,6 +276,7 @@ PAGES = [
 &
 $''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 20.jpg
     ('''
 ᛚᛄ-ᛇᚻᛝᚳᚦᛏᚫᛄᛏᛉᚻ-ᛏᚢᛟ.ᛋᛈᚱᚷ/
 -ᚣᚾᚪᚷᛇᛝᚾ-ᚹᚠᚣᚾᛒᛠᛡ-ᛈᚾᚣᚪᛋᛗ/
@@ -240,6 +291,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 -ᚳᛞᛡᛉ-ᚻᚫᚫᛠᚷ-ᛠᛝ-ᚠᛏᚩᚱᛞᚳᛇ-ᚠᚢ/
 ᛉᛠᛒᚩ-ᛉᛁᚣᚷᛋᛋᛒᛠ-ᚩᛁᛈ-ᛁᛄᛁᚩᛖ-ᚻᛠᚻ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 21.jpg
     ('''
 ᛚᛡ-ᚣᛈᛉᛁᚹᛗᚳᛁ-ᛚᚷᚠᚾᛡᚳᛉ-ᛈᚩᚱᛡ-ᚻ-ᛄ/
 ᛗ-ᛟᛉᛝ-ᚢᛗᛇᛠᚷᛝ-ᛝᚹᚳ-ᛚᛝᚢ-ᛉᛄᚠᛟ/
@@ -254,6 +306,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᚹᚩᚻᛖ-ᚫᛇᚷᚾᚫᛋᛇ-ᚩᛈᛗ-ᛖᛉᛡᛒᚹ-ᚢᛖᛁᛞ-/
 ᛈᚪᛇᚷᛋᚳᚷᛞᛈᚣ-ᛡᛚᚦᚱ-ᚳᚢᚠᛇᚦ-ᛉᛖᛚ-ᚢ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 22.jpg
     ('''
 ᚱᚫ-ᛉᚻᛄᚫᛗᛚᚠ-ᚳᛝᛞ-ᛁᛝᚩ-ᚳᛋᛟᛖᚣᛟᚻᚢ-/
 ᚷᛞᚹᚪ-ᛖᛋᚷᛝᚠᛉ-ᛞᛉᛄ-ᛠᚻᛁ-ᚦᛈᛉᚣ-ᛡ-/
@@ -268,6 +321,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛞ.ᚫᛈᚩᛄ-ᛒᚻᚱᛁᚷᚻᛄ-ᚣᚹᛗᛇᚾᚫ-ᛞᛝᛇ-ᛟᛄ/
 ᛝᚳᛖᛠ-ᛉᚪᚱᚣ-ᚪᚢᛏ-ᚳᛈᚳ-ᚩᛇᛟ-ᚫᛈ-ᛏ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 23.jpg
     ('''
 ᛉᚳᛏᚻᛞᛇ-ᛉᛒᛠ-ᚫᚾᛄ-ᛠᚪᛒ-ᛖᛠᚹ-ᛡᛚ-/
 ᚹᛁᛡᛋᛈᛚᚦᚪᛋᛄ-ᛡᛞᚣᚱᛞᛟ-ᚦᚱᛉᛟᚹ-ᚣᛞᛏ-/
@@ -281,6 +335,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛈᛗ-ᛞᛋᚠᛗ-ᛟᚹ-ᛞᛚᛏ-ᚷᚱ-ᚩᚢᛋᚻᚪ-ᚣᛇᛡᛚ/
 ᚢᚻ-ᛈᚹᛄᛚᚷᛒ-ᛗᚢᛄᛗ-ᛇᚾᛇ.ᚫᛚᚪᛚᚷᚪ-ᛋ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 24.jpg
     ('''
 ᚻᛝ-ᛚᚦᛒ-ᛋᚳᚢᚳᚩᛡ-ᛚᚳᛄ-ᛉᚪᚾᛇᛉ.ᛠ/
 ᛗᛈᚢ-ᛗᚠᛚᛠᛝ-ᛒᛉᛁ-ᛚᚦᚱ-ᛠᛡᛁᚳ-ᚩᛉᛖ/
@@ -296,6 +351,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 &
 $''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 25.jpg
     ('''
 ᛉᛁᛉᛗ-ᚢᛉᛗᚳᚦᛈᚩᛒ.ᛡᚾᛏ-ᛠᛉ/
 -ᛈᚱᚣ-ᚩᚳᛠᛗᛝᚷᛉᛚᚢ-ᛝᛁᛏᚩ-/
@@ -310,6 +366,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᚦᛋᛚᚩᚢ-ᚫᚩᚪᛗᛟᚢᚹᛇ.ᛒᚾᛋᛚᛝᛄᛟᚾ-ᛗᛚᛒ-/
 ᛟᛏ-ᚾᛞᛒᚩᚾᚦᛡᚻᛟ-ᚱᛈᚾᚠᛈᛞ-ᛋᚩᛁᛠᚣᚾ-ᛇ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 26.jpg
     ('''
 ᚣᚹᚫᚷᛄ-ᛝᛗᚪᚹᛈ-ᚪᚢᚾ-ᛈᛡᛗᛖᛞᛟ.ᛁ-ᛉ/
 ᛡᛗ-ᚠᛈᚩ-ᚦᛉᛞ-ᚩᛞ-ᛋᛈᛉᛡᚷ-ᛟᚻᚠᚦᛉᛄ/
@@ -324,6 +381,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛋᚦᛋᚠᛗᚷᛞᛠ-ᛝᛈᚩᚪᚣᛝᛈᛋ-ᛟᚾᛇᚪᛖ-ᚻᚢ/
 ᚷ-ᚩ-ᚢᚦᛏ-ᛒᚷᚣᛝᚠᚣᛁᚻ-ᚹᛡᛠᚱᚫᚹᛡᛞᚪᚦ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 27.jpg
     ('''
 ᚳ-ᛉᚢ-ᛈᛏᛋᚢᛖ-ᚷᚦᛡᛚ-ᛖᛋᛠᛝᛉᛈᛉ-ᚾ/
 ᛟ-ᛞᛟᛒ-ᚾᚹᚢᛁᛇᛚᛞ-ᛁ-ᚦᚣᚷ-ᛟᛈᛡ-ᛖᚪ.ᚠᛋᛉ/
@@ -338,6 +396,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᚢ-ᛗᛉᚹ-ᛖᛈᛖ-ᚩᚳᛈᚳᛞᚪᛉᚢᛗᛝᛟ-ᛋᚾᛟ/
 ᛉ-ᚠᚱᚳᛒᚢᛄᚱᚫᛝ-ᛒᛋᛟᛠᛡᚪᛚ-ᛏᛟᚾᚫᛟᚪ-ᛁ-/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 28.jpg
     ('''
 ᛡᛋᚳᛖ-ᚹᛒ.ᚾᛚᛝ-ᚦᚾᛁᛠ-ᛒᛡᚱᚠᛖᛁᚹ-ᚾᚠᛗᚢ/
 ᚷᚾ-ᛄᛚᚳᚱ.ᛝᚣᛉᛋᚪᛟᚱᛉᚳ-ᛒᚫ-ᚠᚢᚪᛖᚪᚹ-/
@@ -352,6 +411,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛋᚢᛚᚪᛈᚢᚳᛖᚠᛞᛉ-ᚦᛠᛇᛝᚻ-ᚣᚱᛗ-ᛟᚾᛚ./
 ᛈᚹᛞᚱᛄ-ᚪᛝᛞ-ᛁᚦᛏᚷᚢᚹᚳᚻᛖᚩᚪᛖ-ᛉᚪᚢ-/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 29.jpg
     ('''
 ᚳᛁ-ᚱᚳᚹ-ᛠᛇᛏ-ᚦᚳᚻᚢ.ᛡᚹᛟ-ᚷᛇᛈ-ᚢᛈᚦ-/
 ᚷᚣᚢᚪᛗ-ᚹᚳᛖᛝᚱᛠᛞᛏᚻ-ᛄᛁᛈᚻᚠᛉᛝᛈ/
@@ -366,6 +426,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᚻᚦᚣ-ᚻᛚᚾᛋᚱᛡᚫᛚᚫ-ᛖᚷᚻ-ᛞᚾᚻᛠ-ᚠᚪᚹᛖᚠ/
 ᛄ-ᛒᛇᚱᚹᛏᛉᚾᛠᛖᛁ-ᚠᚾᛡᚳ.ᛋᛟᚹ-ᛈᚷᛝᛟ-/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 30.jpg
     ('''
 ᚷᚦᚠᛄᚷᚳ-ᛒᛁᛗᛚᛇᛠᚹ-ᚾᚫᚹᚷ.ᚩᚻᚪᛏᚾᛄ-ᚣ/
 ᛝᛏᛡᛝ-ᚢ-ᚩᚠᚣ-ᛗᚢᛒ-ᛏᚠᛈ.ᚱᚩ-ᛉᚩᛝᛒ-ᛖ/
@@ -380,6 +441,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛏᛗᛏᚻᚹ-ᛇᚳᚪᛞ-ᛠᚢᛒᛉ-ᛡᛁᛡᛚ-ᚷᛋᚦᛞ-ᚠ/
 ᚢᚩᛠ-ᛚᛋᚣᛏ-ᛋᚪᛞᚫᚹᛄᛞ-ᛋᛈᛋᛄ-ᚪᛖᛁᛇᛒᛟ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 31.jpg
     ('''
 -ᛏᛄ-ᚠᚩᛚᛞ-ᚾᚷᚳ-ᛚᚷᛗ-ᛠᚦᚢ-ᛟᚻᚾᛟᚣᛡ./
 ᛇᚻᚣᚪᛈ-ᚾᛋ.ᛞᚫᛠᚳᛉᛄ-ᚦᚹᛋᚱᚦᚫᚾ-ᛡᛚᚣ/
@@ -390,6 +452,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 -ᛟᛚ-ᛋᚪᚢᚪᛈᚻ./
 &''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 32.jpg
     ('''
 ᚠᚢᛚᛗ-ᚪᛠᚣᛟᚪ./
 3258    3222    3152    3038/
@@ -406,6 +469,7 @@ $
 ᛡᚻᛇᛚ-ᚢᛏᛋᛞ-ᚦᚢᛞᛝ-ᛚᛉᛝ-ᛏᚩᛚ-ᚪᛚ-ᚣ-ᛟ/
 ᛡᛉᚣ-ᛒᚻᚫᛄᛡᛁ-ᚱᚦᛚᚠ-ᛠᚾᛝ-ᛉᛗᛒᚩᛠᛈ-/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 33.jpg
     ('''
 ᛖᛞᚪᚫᛏᚩᛠᛖᛠᛉᚳᛠᛏ-ᚩᛞᚳᛠᚾᚳᚦ/
 ᛗ-ᛞ-ᚷᛁᚳᚹᛟ-ᚪᚢᛒᚳᚫ-ᚦᚱ-ᛋᚣᚪ-ᛏᚦᛒ-ᛝᚹᛋᚱᛁ/
@@ -420,6 +484,7 @@ $
 ᛏᛈᛒᛗ-ᛇᛝ-ᚢᚳᚱᛡ-ᛖᚩᛁᚣᛄᛏᛡ-ᛖᚠᛇᚠᛚ-ᛁ/
 .ᚣᚷᚠᛝᛡᛈᚷᛒ-ᛡᚩᚷᛡ-ᛟᚾᚹᛡᛈᛟ-ᚦᛈ-ᛟᚷ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 34.jpg
     ('''
 ᛚᚦ-ᛈᛞ-ᚦᛇᛒ-ᛡᚪᛒᚪ-ᚾᛗ-ᚳᚾᛖᛡᚹᛝᛏᚱ-ᛝᚫ/
 ᛚᛟᛁᛇᚣ-ᛝᛡᚾᛏ-ᚱᛁ-ᛋᚪᛖ-ᛇᚢ-ᛝᛞᛄ-ᚠᚱᛠᛗ/
@@ -434,6 +499,7 @@ $
 ᛠ-ᚦᚠᛋᚠᛝᚷᚱᛈ-ᛏᛄᛉᛟ-ᚷᛚᚻ-ᚩᚪᚦᛏᚳᛁ-ᚠ/
 ᚣᚢᛁᚹ-ᛟᚪᚣᛁᛠᛄᚪ-ᛟᛝᚦ-ᛟᚠᚦᚾ-ᛇᚷ-ᛠᛚᛒᚠ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 35.jpg
     ('''
 -ᛠᚪᛄᛇᛠᛚ-ᚱᚷᛋ-ᚹᚩᛒᛁ-ᛠᚳ-ᛁᛞᛄ-ᛖᛗᚱ-ᚷ/
 ᚪᚻᛠᛚᚷᚩ-ᛉᚻ-ᛡᛝ-ᛞᚱᚹᚩᛈᛡ-ᚣᚳᚦ-ᛁᛇᚢᛁ-/
@@ -448,6 +514,7 @@ $
 ᚢ-ᛈᚱᚹᛟᛇᛉ-ᚳᛟᛈᛏ-ᚢᚠᚳᛞ-ᛄᛋᛞᛈᛚ-ᚠᛝ/
 ᚱᛄᚣ-ᛞᛗᛖᚣ-ᚢᛖᛝᛠᚳᛞᛈᚩᛠ-ᛏᛒᚳ-ᚷ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 36.jpg
     ('''
 ᚾᚩᛟᚾᚠ-ᚩᛁᚠᚢᛋᚾ-ᛞᚹᛠᛇᛈ-ᚱᚩᚩᛄ-ᚪᛟ-ᛇᛠ/
 ᛄᛁ-ᛟᛄᛞᚢᚳᛝᚩ-ᚱᛝᛋ-ᛄᛁᛈᛉᛖ-ᛞᛁᚾᛗᛗᚳ/
@@ -462,6 +529,7 @@ $
 ᚾᛉᚫ-ᛚᛈᛁ-ᛒ-ᚠᚾᚠ-ᛡᚩᛏᛞᚾᛋᛖᚳᚻ-ᛖᚻ-ᚢᛟ-/
 ᚪᛖᛗᛝ-ᛠᚫ-ᛈᚩᚪᛞ-ᚠᚫᚻ-ᚠᛏᚦᛄᛚᛄᛒ-ᛗᛇ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 37.jpg
     ('''
 ᛈ-ᛄᚢᛒ-ᚷᛁᛇ-ᛈᛉᚣ-ᛈᛟᚦᛞᚱᛠᚪᛡ-ᛝᛡᛒᛚ/
 ᚻᚦᚫᛉ-ᛟᚫ-ᚪᛇ-ᛉᚳ-ᛠᚠᚫ-ᚢᚣᚦᛋ-ᚠᛝᚠᚱᚹ-/
@@ -476,6 +544,7 @@ $
 ᛞᛚᚢᛟᛡ-ᚱᛞᚱᛒᛄᚳᚢᛠ-ᚩᛉᛉ-ᛝᛡᛄ-ᛁᚫᛟ/
 -ᛖᛗᚹ-ᛖᛉᚦᛗᚪᛋᛉ-ᛞᚦ-ᛡᚢ-ᛉᛗᚫᛋᚳᛖ-/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 38.jpg
     ('''
 ᚳᚫᛠ-ᛞᚳᚷ-ᚩᛁᛇ-ᚾᛟᚷᚣᚳᚦᚳᚦ-ᛗᚣ-ᛈᚪᛒ/
 ᛈ-ᚻᚢᚻᚾᛏᚫᛒᛇᚩᛁᛈ-ᚫᚩᚣ-ᛡᚣᛗᚷ-ᚠᚱᛡᛚ/
@@ -490,6 +559,7 @@ $
 ᚹᛁᚪᛁᚩᛁ-ᛝᛠ-ᚾ-ᚷᛗᚹᚦᛖ.ᚷᛟᚪᚹᛞᚻᚢ-ᛡᚹ-/
 ᚣᚷᛉᛒᚪᚾᛝᛡᛄᛡ-ᚠᚷᛈᚦᚠᚦ-ᛁᛈᚪᛝᛋᛞᛟᚩ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 39.jpg
     ('''
 ᛝᛗ-ᛁᚷ-ᛄᚷ-ᚳᚩᚦᛖᚦᛄ-ᚣᚠ-ᚦᚳᛄᛡᛖᚢ-ᛉᛄ/
 ᚳᚻᛄᚱᛄ-ᚪᚻᚾᚦ-ᛚᚷ-ᚱᚦ.ᛒᚪᚩᛖᚢᛡᛄᚹᛏᚱᚹ/
@@ -500,6 +570,7 @@ $
 &
 $''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 40.jpg
     ('''
 ᚢᚪ-ᚹᛝᚷᛉᛞᚷ-ᛁᛒᛁ-ᛇᛏᛒᛁᚣ.ᛠᚷᛋᚫ/
 ᛈᚹᛗᛠ-ᛇᛄᛇ-ᚹᚻᛁ-ᚷᛠᛒᚢᚣᚻᚣ-/
@@ -512,6 +583,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᚩᛡ-ᚠᚣᛉᛟᚫᚦ-ᚫᛒᚩ-ᚪᚦᛄᚱᛄᚾᚦ-ᛡᚠᚪᛏᚾᚻ-ᚷ/
 ᚢ-ᛞ-ᚳᚦᚢᚱᚢᛟ-ᛞᚻᚱ-ᚷᚹᛏᛈᛖᚠ-ᚪᚻᛠᚦ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 41.jpg
     ('''
 ᛞᚱᚠ-ᛖᛄᚫ-ᚾᚳᚻᚹ-ᛇᛡᛈᛠᚹ-ᛗᛚ-ᚹᛟᚹᛠ-ᚪ/
 ᚾᚪ-ᚳᚪ-ᚷᛚᚦᛒᚩᚹᚢ-ᚷᛚᚠᛋᚻ-ᚾᛉᛝᛗ-ᛖᚦᚢᛝ/
@@ -526,6 +598,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛠ-ᛝᚩᚻ-ᛡᛠᛒᛋᚻᛟ-ᚫᛁ-ᛠᛏᛁᛋ-ᛏᚫᚻᚱ-ᚻᛄ/
 ᛋᛡᚹᚾᚾᛡᚹᛚ-ᚢᛖ-ᛏ-ᚱᛝᚳᚣ-ᚪᛉᛇᛝᛋᛖᛇᛁ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 42.jpg
     ('''
 ᚻᚾ-ᚷ-ᚹᛉᚳᛉᚣ-ᛋᛈᚳᛟᚱ-ᛒᚣᛄᛝᛖᛁ-ᚾᚷᚪ-/
 ᚣᚷ-ᛚᛒ-ᚢᛄᚩ-ᛝᛉᛉᚪᛖ-ᛒᚦᛉᛡᚱ.ᛏᚷᚹᛄᛋ/
@@ -540,6 +613,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᚫᚻᛖᚢᛏᛚᛚ-ᛇᚷᛟᚣ-ᛒᚾᚦᚻ-ᛠᛖᛄᛒᚾᛁᛚᛠ/
 ᚱ-ᛄᚠᚳᛋᛝᚳᛈ-ᚷᚻᛋᛗ-ᛇᛞᛇ-ᚣ-ᛡᛖᛏᛠᚢ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 43.jpg
     ('''
 ᛡ-ᚩᚾᛠᚩ-ᛄᚣᛇᛉᛠᚪᛡ-ᚾᛞᛝᚻ-ᛈᛠᚻᛡ/
 ᚢ-ᛝᚻᚦᛈ-ᛉᚢ-ᛠᚣᛈᛟᚦᛋᚣᛈ-ᚠᛏ-ᛒᛁᛟᚪᚷ/
@@ -556,6 +630,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 &
 $''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 44.jpg
     ('''
 ᛗᛈᚣ-ᛚᛋᚩᚪᚫᚻᛚᛖᛇᛁᛗᛚ-ᛚᛋᚳᛈ.ᚾ/
 ᚻᚷᚢᛡᚻᚢ-ᛒᚠ-ᛞᛄᚢ-ᛒᛖᛁ-ᚫᚠ-ᛈ-/
@@ -569,6 +644,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᚫᛉᛒᛏᛖᛠᛗᚷᚱᛗ-ᚣᛝᚠᛒ-ᛞᛟᛞᚪ-ᛠᚱᚳᛁ/
 ᛈᛞᚠᛗᛝᚻ-ᛋᚩ-ᛞᛈᛉᚾ-ᛟᚱᛡᚾᚳᚳᛏ-ᚾᛈᚠ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 45.jpg
     ('''
 ᛈᚳ-ᛄᚦᛒᛁᚹ-ᛞᚹᛝᛠᛡᚹᛚ-ᚹᛄᚾᚪᛟ-ᛏᛞᛉᚣ/
 ᛖᚱᛞ-ᚱᛏᛇᛁᚳᛈ-ᛝ-ᚦᛟᚷᛄᚦ-ᚣᛋ-ᛠᚻ-ᚠᛒᛚ-ᛁ/
@@ -583,6 +659,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛄ-ᚢᚷᛠ-ᛗ-ᛇᚪ.ᚻᚦᛡ-ᛝᛈᛞᛒ-ᚳᛉᚳ-ᛠ/
 ᛉ-ᛟᚣ-ᛒᚦᛁᛄᛚᛡᛝᛡ-ᚹᛄᚫ-ᛋᛗᚪᛡᛠᛇᛝᛏ-/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 46.jpg
     ('''
 ᚦᛞᚷ-ᚢᛏᛚᛏᚣ-ᚢᛝ-ᚷᛟᚪᛏ-ᛄᚦᚣ-ᚫᚻᚪ-ᛒᛝ-/
 ᚦᚢᚱᚪᚾᛞ-ᛁᛝᚫ-ᛚᚫᚷ-ᚹᛁᛒᚣ-ᚾᚫᚠ-ᛚᛋᛒ-ᛈᛟᚪᛟ/
@@ -597,6 +674,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᚻ-ᚷᛚ-ᚠᛖᚦ-ᛇᚻ-ᛝᛖᛒᛚᛞᛁᛗᚠ-ᚹᛒᛗᛟᛁᛖᛁᛠ-/
 ᛈᚻᛝᛖᛞᛟᚩᚻᛄ-ᚹᚩᚾᛄᛈᛗ-ᛖᚳ-ᛖᛇ-ᚷᚻᛗ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 47.jpg
     ('''
 ᛞᚪᛈᛖ-ᛗ-ᛉᚫᛒᛇᚱ-ᛖᚣᛟᚣ-ᚱᛠᛈᚢᛠ-ᚣ/
 ᛖᚪᚻ-ᚩᛉᛠᚢᚻᛡᛟ-ᚷᚫᚩᛒᛉ-ᚫᚱᛞᛋᚩᚱ-ᚷ/
@@ -611,6 +689,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᚣᛉᚾᛏᚫᛉᛋᚦᚪᚹᛗ-ᚪᚱ-ᚪᚩᚻ.ᛗᛖᚫᛞᛠᛁᛗ/
 -ᛒᛟᚾᚳᚩᚱᛉ-ᛋᚹᚫ-ᚻᛖ-ᛋᚠᚾ-ᚢᚦᛟᚷᛖᚪᛟᛇᛇ-/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 48.jpg
     ('''
 ᚦᚳᛒᛝᛏᛉᛡᛞ-ᛋᛡ-ᚩᚠ.ᛈᛖᛞᛋᛁ-ᛚᛁᚻᚾᛝᚱ-/
 ᚻᛈ-ᛇᚢᚫᛞ-ᛚᚻᛉᚳᛈ-ᛁᛗᛉᚳ.ᛄᚫᚾᛞᛋ-ᛏᛚ/
@@ -625,6 +704,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᚩᛒᛋᛉ-ᚹᛞ.ᚦᛇᚱᛖ-ᛄᚾᛞᛝᚹᚪ-ᚻᛖᚹ-ᛟᛡᛄ/
 ᛡᛟᛝᛄᛉᛚᛄ-ᛞᛉᛟᛈ-ᚱᚪᛁᛏᚷᛉᛝᛇ-ᛠᛗᚩ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 49.jpg
     ('''
 ᛚ-ᚦᚫᚹ-ᚫᚢᛈᛡᚳ-ᚹᛝᚻᚹᛒᛗᛋᛟᛖᛁᛡ-ᛟᚹᚦᚻᛒ/
 -ᛡᚱᛏᚦᚠ-ᚠᚩᚦ.ᚻᚩᛗᛖᛉᚹᛞᛋᛚᚠᛞ-ᛝᛒᛇᛡ/
@@ -635,6 +715,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 &
 $''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 50.jpg
     ('''
 ᛞᛇ-ᛉᚳᚠᛁᚪᚹᚻᚷ.ᛇᛟ-ᚠᛏᛖᛟᛠᚪ/
 ᛡᛋᚷ-ᚣᛠᚾᚦᚫᚱ-ᚩᛡᛗ-ᚹᛉᛗ-ᚣ/
@@ -649,6 +730,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛇᛁᛒᛡᚪ-ᛖᚠᛠᚢᛖ-ᛈᛋᚹᛞᛞ-ᛋᛡ-ᚹᚦᛞᛋ-ᛝ/
 ᛄ-ᛚᚷᚢᛡ-ᚾᛉᚠ-ᚱᚪᚣᛗᚠᚦᚻ-ᚱᚪᚱ-ᚫᚪᚷᛟᛞ-ᛒ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 51.jpg
     ('''
 ᛗᛒ-ᚾᚻ-ᛇᛞ-ᚻᛗᛚᛁ.ᛠᚾᛁ-ᚫᛖᚢ.ᛏᚦᛇᛋᛈᚻ/
 -ᚻᛇᚳᛠᚫ-ᛞᛚᛋᛝ-ᛁᚹ-ᚪᚳᚩᛏᛇᛝᚷ-ᚳᚦᛋᛠᚠ/
@@ -663,6 +745,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛈ-ᛗᛖᚩᚹᚢ-ᛟᛞᛋᚱ-ᚣᛞᛋᚳᛡᛉ-ᚻᚦᚹᛚᛞ/
 ᛠᚩᛞᛠᚢᛟᛖ.ᛠᚹ-ᛉᚻᛡᚹᛞ-ᚪᛗ-ᚠᚦᛈ-/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 52.jpg
     ('''
 ᛝᛏᚳᚪ-ᛠᚣᚷ-ᚳᚦᛖᚾᚢᛁᚫᛁᚢᛡ-ᚹᛚᚳ-ᚻᛈ-ᛞ/
 ᛄᚳ-ᛗᛒ-ᛗᚪᛄ-ᚩᚪᛞᛁ-ᚩᚱᛟᚠᛖᚣᛟᛁ.ᛇᛟ-ᛁᛈᚣ/
@@ -677,6 +760,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛗ-ᛁᚱᚷᛏᛠ-ᛇᛟᚻᛟᚳᛋᛏᚾᚩ-ᛁᚱᚷ-ᚹ-ᛞᚢᚣᛚᛁ/
 ᛗᛒᚢ-ᛚᚱ-ᛏᛁᚢ-ᚷᚳᚠᛇ-ᛚᛇᚣᛏ-ᛏᚫᚢ-ᚫᛠᛇ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 53.jpg
     ('''
 ᚣᚾ-ᚢᚹᛝᚻ-ᚷᚣᚱ-ᚩᛁ-ᛚᚾᛉ-ᚾᚩᛈ-ᚠᛠᚫᚫᚩ-ᛉ/
 ᚾᛋᛟᚫᛚ-ᚾᚫ-ᚦᚢᛠᚣᚫ-ᛈᛁᛇᚢᚱᛄ-ᛈᛟᛄᚪᛝᛈ/
@@ -690,6 +774,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛇᛝᛒᛚᛁᚢᚣᚠᛟᚾᛟ-ᛒᛟᚷᛄᚪᚾᛗᚫ-ᚣᚦᚠ-ᛁᛒᛝᛈ/
 ᚾᛁᚱᚷ-ᛄᛇᚫ-ᚻᚪ-ᚱᛉᛉ-ᚩᛚᚾᚫ-ᛞᚣᛒᚾᚪ./''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 54.jpg
     ('''
 2-ᚾᚣᛖᛉ-ᚾᚢᛉᛁ-ᛝᛏᛈᚹᛋᚣ-ᛏᛠᛈᛉ-ᚪᛁ/
 ᛄᛋᚱᚪᛏᛋᛝᛏ-ᚳᚷᚳᚻ-ᛖᛟᚱᚪᛡᚻᚳ-ᛝᛒᛖᚱ/
@@ -703,6 +788,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 4-ᛝᛄᛋᛄᛗᚱᛗ-ᚾᛒᛋᛗᛉᛞᚻᛉᛁ-ᚣᛡᚻᚣ/
 ᛠᛉᚻ-ᛞᛖ-ᚹᛖᚦ-ᚢᚳ-ᛉᛗᚪᚣᛠ-ᚹᚫᚪᚳ-/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 55.jpg
     ('''
 ᚢᚫᚳᛇᚳᚣ-ᛡᚫᛏᛖᚳᚠ-ᛋᚻ-ᛋᚱᚢᚦ-ᛁᛋᛝᛗᛞ/
 ᚫᚢᛠᚢᚪ.ᚾᛝᚳ-ᛖᛈᚹᛉ-ᚢᛉᚫ-ᚾᛈᚳᚻᚱᚣ/
@@ -717,6 +803,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᚫᛞᛟᚫᛟᛗ-ᛟᚫᚪᚻᚱᛗᚢ-ᚣᚢᚣ-ᛈᛗ-ᚪᛄᚫᛟ/
 ᛠᛚᚠᛖᛡᚢ-ᛉᚻ-ᚪᚩᛡᛒᛠᚢᚷ-ᚻᛏᛠᚪᛞ-/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 56.jpg
     ('''
 ᛋᚹ-ᚦ-ᚾᛋᛁᚻᛒ-ᛉᛠᛝ-ᛒᚢᛚᛟᚢᚾ-ᚢᚦᚩᛗᚪ-ᚾ/
 ᛞᚫᛇ-ᚫᚣᚪᛋ-ᚣᛝᛡᛗᚷᛇᚾᛈ-ᛠᚳᚻᛝᛚ-ᚠᚷ/
@@ -734,6 +821,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 &
 $''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 57.jpg
     ('''
 ᚠᚾᛗ-ᚣᚷᛞᚫᚻ.ᚪᛈᛉᚣᚻ-ᛇᛠᚩᛖ-ᛏᛝ/
 ᛠ-ᛚᛁᛏᚦᚠ-ᛗᚪᚳᛖ.ᛞᚳ-ᛏᚱᛟᚷᛠᚾ/
@@ -747,6 +835,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᚠᚫᚩ-ᛟᚳᛚᛞᛡᛚ-ᚩᚳᛝᚢ-ᛈᚹᛏ-ᚷᚳᛋ-ᚢᛟᚷᚦ-/
 ᚠᛉᚠᛏ-ᚳᛋᛉᛟ-ᚷᚠᛉᚾᛞ-ᛒᛏᛠᛡ.ᛈᛡ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 58.jpg
     ('''
 ᛠᛁᚪ-ᛋᚣᛗᛞᚣᛋ-ᛒᛞᛄᛞ.ᚩᚾᛏᛚ-ᚳᚪᛝ-ᚱᚷ/
 ᚻᚷ-ᛄᚹᚠ-ᚪᚢᛇ-ᛞᛏᛗᛄᛁ-ᛝᚫ-ᛉᛈᚳᛈᛠ-ᛟᚪ/
@@ -761,6 +850,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛠᛁᚫ-ᚦᚠᛟᚷᛠᛁ-ᛈᛋᛒ-ᛗᛒᛄᚠᚾᚳᛖ-ᚻᚫᚩᛄ-/
 ᛉᛄᛚᛈᚪᛁ-ᛟᚹᚱᛁᚱᚦᛖᛉ-ᚪᚾ-ᛞᛄᚷ-ᛟᛟᚳᛏᛄ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 59.jpg
     ('''
 ᛞ-ᛉᚾᛗᚦ-ᛁᛄᚱ-ᛈᛉᚢᚫᚦᛒᚠᛄᚦ-ᚠᚪᛝᛖ-ᚹᚹᚣ/
 ᛚᛇ-ᚢᚣ-ᚾᚱᚪ-ᛈᚾᚹ-ᛚᚾᛏᛚᚢᛒᚱᛝᚪᛋ-ᚫᛈ-ᛄᛚ/
@@ -775,6 +865,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛉ-ᛠᚢᛠᛚ-ᚠᛝᛗᚻ-ᚦᛒᚩ-ᛗᛚ-ᚩᛠᛋᚦᛠ-ᛇ/
 ᛋᛉ-ᚠᛗᛒ-ᚫᛋᛇᚾᛡᚾ-ᚢᚫᚹ-ᛞᛠᚢᚾᛝᚠᚾᛖᚫ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 60.jpg
     ('''
 ᚻᛄ-ᛁᛖᛏᛡ-ᚷᛁᚩᚾ-ᚳᚢᚫᛗᛈᛋᚪᛡ-ᚷᛚᚣᚹᛟ-/
 ᚠᚢ-ᛉᚠᚫᛞᚠᛡᛄᚾ.ᚻᛋᚦᚠ-ᛏᚠᛄᚱᚹᚠᛋᚾᚹᛄ/
@@ -789,6 +880,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛝᛗ-ᚳᚢᛁ-ᚣᛋᚳᚢᛡᛇᚩ-ᚠᛖ-ᚷᛟ-ᚻᚫ-ᛝᚠ-ᛗᚠ/
 ᛝᛉᛞᛁ-ᛗᛝᚣᚪᛝᚠᛉᛁᛟᚷᛚ-ᛇᚩ-ᚫᛡᛏ-ᛄᛏ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 61.jpg
     ('''
 ᛠᚢ-ᚷᚦᚣ-ᚦᚾᛟᚣᚩᛖᚻ-ᛁᛋᛖᚣᚦᚪᛡᛝᛟᛇᛚ-/
 ᛡᛏᛝ-ᛁᛚ-ᚠᛉᛡᛠᛏ-ᚠᚾᛄᚠᚻᚳ-ᚻᛞᛠᚣᛟ/
@@ -803,6 +895,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᚩᚪᚢ-ᚣᛖᚪᛋᛟᛇᚢᚪᛡ-ᛗᚱᛚᚳᚠ-ᛒᛗᛝ-ᚻᛉ-/
 ᛠᛄᚫ-ᛉᚪᚷᚻᚣᛏᛖᛝ-ᛉᛉᛗᚾᚫᛋ-ᚱᛗᛞᛋ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 62.jpg
     ('''
 ᚳ-ᚦᛚᛟ-ᛝᛇᚢ-ᚻᚩ-ᛏ.ᚢᛁᚦᛄᚾᚠᚱᚦ-ᛋᛟᚷᛠ/
 ᛗᚪ-ᛝᛚᚪᛁᛒᛠᚢᛋ-ᚩ-ᛖᛋᛝ-ᚠᛡᚢᛟᛞᛇᚪ-ᛞ/
@@ -817,6 +910,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᚣᛚᚩ-ᚩᛡᚳᚻᛄ-ᛋᚣᚹᛁ-ᚣᚠᛋᚾᚪ-ᚷᛖᚾᛄᚪᚹᛠ-/
 ᛞᚠᛟ-ᚢᛁ-ᛖᛇᚦ-ᚫᛞ-ᚳᛄ-ᚷᚢᚻᚣᚻᛁᛒᛉᚾ-ᚹᛝ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 63.jpg
     ('''
 ᚻᛏᛉᚫᛁᛄᚢ-ᛞᚠᛡᚫ-ᛋᛁᚹᛝᛈ-ᛗᛉᛄᛈ-ᛞᛗ/
 ᛝ-ᛇᛚᛞᚣ-ᚠᚩᛞ-ᛝᚷᚾᛇ-ᚷᛖ-ᛚᛉᚣ-ᚫᛚᛖᛉ./
@@ -831,6 +925,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᚳᚢᛚ-ᛞᛄᛝ-ᚦᛄᛁᚪ-ᚹᚣ-ᚢᛝᚾ-ᛋᚾᛈᚠᚫᛒᛄᚫ-ᛡ/
 ᛗᚹ-ᛇᚪᚩᚾᛄᚳᛚᛒᛉ-ᚣᛠᚦᚹ-ᛝᛚᛗᚳᛡᛇᚠᚫ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 64.jpg
     ('''
 ᛠᛁᚦ-ᛒᛠᛚᚦᚳᛞᛁᛇ-ᚠᚢᛉᛋᛉᛁᚦᚫᛋᛗ-ᚦᚹ./
 ᛈ-ᛒᛋᛏᚫᚾᚱᛁ-ᚦᛇᛡᚱᛚᛡᚹ-ᚢᚩᛋᚱ-ᚹᚫ-ᛒᚹᛡᛖ/
@@ -845,6 +940,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛠᚢᛉᚦ-ᚣᚢᛋ-ᛡᛚᛖᚷᛗᛝᚹᚻᚱᛋ-ᚢᛟᚣᛠ/
 ᚷᚩᚷ-ᛇᛁᛖ-ᛠᛄᛇᛁᚾᛄᚩᛗᚱᛡᛉ-ᚠᚻᚳ-ᚪᚩᚪᚫ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 65.jpg
     ('''
 ᚻᚳᛁᚦ-ᛄᚷ.ᛝᛖᚢ-ᛡᛏᛁ-ᛚᚩᚱᛈ.ᚠᚪ-ᛈᛞᚱᛒ-/
 ᛝᛁᛋ-ᚷ-ᚠᚾᛈᚠᛒ-ᛟᚦᛁᛠᚪ-ᛡᛏᚾᚳ.ᚦᛟᚻᛈᛖᛚ/
@@ -859,6 +955,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛒᛗᚱᚾᛗ-ᚩᚾᚠᚣ-ᛗᚠᛇᚠᛄ-ᛒᛡᛈᛄᛖᛡᛏ-ᛈᛟ/
 ᚫᛏᛟ-ᚻᛖᚾ-ᚳᛇᚩ-ᛋᚻᚫᛇ-ᛝᛁᛟ-ᛇᚠᚢᛞᚣᚪᛚᚠ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 66.jpg
     ('''
 ᛡ-ᛖᛄ-ᚠᛚᛟ-ᛁᚳ-ᛁᛝᚷᚦ-ᛗᛋᚫᚷᚪᛠ-ᛗᛁ-ᛒᛡᛏ/
 ᚾ-ᛝᛗᚦ-ᛏᚣᚫᛄ-ᛖᚻᚠᚪᛡᚷ-ᚪᛗᛁ-ᛞᛉᛏ-ᚢᛖ/
@@ -875,6 +972,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 22  4F  0P  3C  3J  1D  2n  1m/
 2i  1J  3P  2v  1s  2O  0k  1M/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 67.jpg
     ('''
 2M  0w  3L  3D  2r  0S  1p  15/
 3V  3e  3I  0n  3u  1O  0u  0Z/
@@ -890,6 +988,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 40  3m  4E  0s  2s  1v  3T  0I/
 3t  2B  2k  2t  2O  0e  2l  1L/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 68.jpg
     ('''
 28  2a  0J  1L  0c  3C  2o  0X/
 00  2Z  2d  1T  2u  1t  1j  0l/
@@ -906,6 +1005,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛝᚷᛚᛋᛞᛝ-ᛟ-ᛋᛄᛞ-ᛚᛟᚠᛄᚫᚠᚪ-ᛝᛟᚣᛈ-ᚣᚩ/
 ᛒᚷᚳᛖᛏᚹ-ᚪᛋᛒ-ᛗᛠᚣᛇᛗᚫᛚᚱ-ᚹᛇᛄᛒ-ᛈᛚᚠ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 69.jpg
     ('''
 ᛈ-ᚠᛗ-ᛝᚪᛇᚾᛟᚹᛇᛉ-ᚣᚫᛉᛞᛟᚱᛒ-ᛡᚱᛟ-ᚹᛏ/
 ᚷᚱᛄᛖ-ᛠ-ᛈᛚᛞ-ᚻᚦᚱ-ᚦᚣᛚᛉ-ᛠᛈᚫᚠᚪ-ᚫᚪ/
@@ -920,6 +1020,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛡᛒᚻᛚᚷ-ᚢᚦᛠ-ᚢᚾᛁᚩᛗᛠᛁᚷ-ᛟᚦᚱᚣ-ᛒᛖ/
 ᛠᚩᛈ-ᛗᛏᚱᚫᚢᚻᛁᛝ-ᛇᚳᚠ-ᛄᚾᚱᚷ-ᛟᚷᚻᚣᚻ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 70.jpg
     ('''
 ᛇᚫᛠᚫᚣ-ᚢᛗᛈ-ᛉᛁᚢᚾᚩᛟᚾ-ᚷᛞᚦ-ᛡᚫᚹ-ᛞ/
 ᛟᛖᚱ-ᛗᚾᛖᚻᚷᛒᚢᛄ-ᚢᚦᛗᛖᛞᛝ-ᛒᚷᚣᚱ-ᛖ/
@@ -932,6 +1033,7 @@ $''', TransformerSequence(UnsolvedTransformer())),
 -ᚢᚱ-ᛈᚾ./
 &''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 71.jpg
     ('''
 ᚪ-ᛗᛝᛞᛡᚦᛉᛁᛗ.ᛡᛞᛈᛝᚢᚹᚪᛗ-ᛏᚪ/
 ᛝ-ᛝᚦᛡᚹᛋᚻ-ᛁᚳ-ᚫᛈᚫᚷᚩ-ᛗᛁᚪ-ᛖᚩ-ᛏᚹ/
@@ -945,12 +1047,14 @@ $''', TransformerSequence(UnsolvedTransformer())),
 ᛋᛖᛉᚹ-ᚳᚷᚠᛞᚱᛖ-ᛞᛖᚹᚩᛇᛟ-ᚻᚩᛟ-ᛒᛋ-ᚻ/
 ᛠᚪᚳᛁᛗᛉᛄᛗᛖ-ᛗᛚ-ᚷᚩᛏᚦᛉᛖᛠᚱᚷᚣ/''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 72.jpg
     ('''
 ᛝ-ᚫᛗᛁᚹ-ᛋᛒ-ᛉᛗ-ᛋᛇᚷᛞᚦᚫ-ᚠᛡᚪᛒᚳᚢ-ᚹᚱ-ᛒ/
 ᛠᚠᛉᛁᛗᚢᚳᛈᚻᛝᛚᛇ-ᛗᛋᛞᛡᛈᚠ-ᛒᚻᛇᚳ-/
 ᛇᛖ-ᛠᛖᛁᚷᛉᚷᛋ-ᛖᛋᛇᚦᚦᛖᛋ-ᚦᛟ-ᚳᛠᛁᛗ/
 ᚳᛉ-ᛞᛄᚢ-ᛒᛖᛁ''', TransformerSequence(UnsolvedTransformer())),
 
+## images: 73.jpg
     ('''
 ᚫᛄ-ᛟᛋᚱ.ᛗᚣᛚᚩᚻ-ᚩᚫ-ᚳᚦᚷᚹ-ᚹᛚᚫ.ᛉ/
 ᚩᚪᛈ-ᛗᛞᛞᚢᚷᚹ-ᛚ-ᛞᚾᚣᛄ-ᚳᚠᛡ-ᚫᛏ/
@@ -965,6 +1069,7 @@ d4618dee09a8425893dc7500b/
 ᚳᛞ-ᚠᚾ-ᛡᛖ-ᚠᚾᚳᛝ-ᚱᚠ-ᚫᛁᚱᛞᛖ-ᛋᚣᛄᛠᚢ/
 ᛝᚹ-ᛉᚩ-ᛗᛠᚹᚠ-ᚱᚷᛡ-ᛝᚱᛒ-ᚫᚾᚢᛋ./''', TransformerSequence(TotientPrimeTransformer(add=False, interrupt_indices={ 56 }))),
 
+## 74.jpg
     ('''
 ᛈᚪᚱᚪᛒᛚᛖ.ᛚᛁᚳᛖ-ᚦᛖ-ᛁᚾᛋᛏᚪᚱ-ᛏ/
 ᚢᚾᚾᛖᛚᛝ-ᛏᚩ-ᚦᛖ-ᛋᚢᚱᚠᚪᚳᛖ./

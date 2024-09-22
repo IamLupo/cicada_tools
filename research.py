@@ -4,6 +4,7 @@ from core import RUNES
 from core import LATIN
 from core import ProcessedText
 from core import latin_to_runes
+from core import PAGE_NAMES
 import secrets
 from transformers import *
 import os
@@ -342,7 +343,12 @@ class Attempts(object):
             page[1].transform(processed_text)
 
             # Present and wait for input
-            print(f'Page: {page_index}\nRunic IoC (pre): {rune_ioc}\nRunic IoC (post): {processed_text.get_rune_ioc()}\nLatin IoC: {processed_text.get_latin_ioc()}\n\n')
+            print(f'Page: {page_index}')
+            print(f'Page names: {PAGE_NAMES[page_index - 1]}')
+            print(f'Runic IoC (pre): {rune_ioc}')
+            print(f'Runic IoC (post): {processed_text.get_rune_ioc()}')
+            print(f'Latin IoC: {processed_text.get_latin_ioc()}\n')
+            
             screen.print_solved_text(f'{processed_text.to_latin()}\n\n{page[0]}\n\n\n')
             screen.press_enter()
             page_index += 1
